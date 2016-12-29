@@ -10,7 +10,7 @@ dependencies:
     - sudo apt-get install mono-complete
     - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
     - mono nuget.exe restore PropertyConfig.sln
-    - mono xbuild PropertyConfig.sln
+    - xbuild /p:Configuration=Release PropertyConfig.sln
 
 test:
   override:
