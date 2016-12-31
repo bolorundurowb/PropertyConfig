@@ -7,6 +7,13 @@ namespace PropertyConfig
 {
     public class Configuration : NameValueCollection
     {
+        public string FilePath { get; set; } = "config.xml";
+
+        public void LoadFromXml()
+        {
+            LoadFromXml(FilePath);
+        }
+
         public void LoadFromXml(string filePath)
         {
             if (!File.Exists(filePath))
@@ -19,6 +26,17 @@ namespace PropertyConfig
             {
                 this[node.Name] = node.Value;
             }
+        }
+
+        public void StoreToXml()
+        {
+            StoreToXml(FilePath);
+        }
+
+        public void StoreToXml(string filePath)
+        {
+            string comment = "";
+            StoreToXml(filePath, comment);
         }
 
         public void StoreToXml(string filePath, string comment)
