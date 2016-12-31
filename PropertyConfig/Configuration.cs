@@ -36,11 +36,11 @@ namespace PropertyConfig
             }
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filePath);
-            if (xmlDocument.DocumentElement != null)
-                foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
-                {
-                    this[node.Name] = node.Value;
-                }
+            if (xmlDocument.DocumentElement == null) return;
+            foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
+            {
+                this[node.Name] = node.Value;
+            }
         }
 
         /// <summary>
