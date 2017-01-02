@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace PropertyConfig.Tests
 {
@@ -11,5 +10,15 @@ namespace PropertyConfig.Tests
         {
             Assert.True(true);
         }
+
+		[Test]
+		public void LibraryIsStable()
+		{
+			Assert.DoesNotThrow(delegate {
+				Configuration configuration = new Configuration();
+				configuration["Hello"] = "World";
+				configuration.StoreToXml();
+			});
+		}
     }
 }

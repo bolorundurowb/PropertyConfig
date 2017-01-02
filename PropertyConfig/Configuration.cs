@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace PropertyConfig
@@ -39,7 +39,7 @@ namespace PropertyConfig
             if (xmlDocument.DocumentElement == null) return;
             foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
             {
-                this[node.Name] = node.Value;
+                this[node.Name] = node.InnerText;
             }
         }
 
@@ -57,7 +57,7 @@ namespace PropertyConfig
         /// <param name="filePath">The specified path to save the config to</param>
         public void StoreToXml(string filePath)
         {
-            const string comment = "";
+            const string comment = "Created by Property Config";
             StoreToXml(filePath, comment);
         }
 
@@ -73,10 +73,11 @@ namespace PropertyConfig
             // Insert Comment
             var xmlComment = xmlDocument.CreateComment(comment);
             root.AppendChild(xmlComment);
-            foreach (KeyValuePair<string, string> pair in this)
+            var allConfigs = AllKeys.Distinct();
+            foreach (var pair in allConfigs)
             {
-                var configItem = xmlDocument.CreateElement(pair.Key);
-                configItem.Value = pair.Value;
+                var configItem = xmlDocument.CreateElement(pair);
+				configItem.InnerText = this[pair];
                 root.AppendChild(configItem);
             }
             xmlDocument.AppendChild(root);

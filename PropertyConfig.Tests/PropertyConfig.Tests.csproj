@@ -46,6 +46,12 @@
         <Compile Include="ConfigurationTests.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\PropertyConfig\PropertyConfig.csproj">
+            <Project>{828A23A3-F607-48C4-9E22-FB2AB4E71025}</Project>
+            <Name>PropertyConfig</Name>
+        </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
