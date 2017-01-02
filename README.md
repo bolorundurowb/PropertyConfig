@@ -18,6 +18,11 @@ Add the directive to your class file:
 using PropertyConfig;
 ```
 
+Instantiate the class (preferrably in the main entry class and storing it in a static variable)
+```csharp
+public static PropertyConfig propertyCfg = new PropertyConfig();
+```
+
 If you already have a configuration XML file, you can load it like:
 ```csharp
 PropertyConfig propertyCfg = new PropertyConfig();

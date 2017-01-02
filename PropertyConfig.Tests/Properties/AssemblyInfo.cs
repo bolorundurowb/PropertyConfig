@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Property Config")]
-[assembly: AssemblyDescription("A simple configuration library")]
+[assembly: AssemblyTitle("PropertyConfig.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Bolorunduro  Winner-Timothy")]
-[assembly: AssemblyProduct("PropertyConfig")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("PropertyConfig.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +23,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("828A23A3-F607-48C4-9E22-FB2AB4E71025")]
+[assembly: Guid("74B1C606-FA43-4DE0-97E3-A3C37935D31A")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,5 +36,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.2.0")]
-[assembly: AssemblyFileVersion("1.0.2.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
