@@ -20,25 +20,36 @@ using PropertyConfig;
 
 Instantiate the class (preferrably in the main entry class and storing it in a static variable)
 ```csharp
-public static PropertyConfig propertyCfg = new PropertyConfig();
+public static Configuration configuration = new Configuration();
 ```
 
-If you already have a configuration XML file, you can load it like:
+Add whatever properties necessary, for example
 ```csharp
-PropertyConfig propertyCfg = new PropertyConfig();
-propertyCfg.LoadFromXml(/*path to config file*/);
-```
-The properties can be accessed via a `NameValueCollection`:
-```csharp
-string propertyValue = propertyCfg["propertyName"];
+configuration["Hello"] = "World";
+//or 
+configuration.Add("Hello", "World");
 ```
 
-Properties can also be set using the `NameValueCollection` like:
+After including every property, save the configuration
 ```csharp
-propertyCfg["propertyName"] = propertyValue;
+configuration.StoreToXml(); //saves to the default 'config.xml'
+//or
+configuration.StoreToXml(/*path to custom xml file*/); //saves to specified xml file
+//or
+configuration.StoreToXml(/*path to custom xml file*/, /*comment to add to config files*/);
 ```
 
-When you are done setting all configuration properties, you can save your configuration to an XML file via:
+this produces an output that looks like
+```xml
+<config>
+  <!--Created by Property Config-->
+  <Hello>World</Hello>
+</config>
+```
+
+To load a config file
 ```csharp
-propertyCfg.SaveToXml();
+configuration.LoadFromXml() //loads from default 'config.xml'
+//or
+configuration.LoadFromXml(/*path to custom xml file*/); //saves to specified xml file
 ```
