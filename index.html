@@ -2,8 +2,125 @@
 <html>
   <head>
     <title>Property Config</title>
+    <!--Font-->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro">
+    <!--Icons-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <!--Styles-->
+    <link rel="stylesheet" href="styles/blaze.min.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <!--Scripts-->
+    <script src="scripts/main.js"></script>
   </head>
-  <body>
-    
+  <body class="c-text">
+    <div class="header header--primary">
+      <div class="o-container o-container--small">
+        <div class="o-grid">
+          <h1 class="o-grid__cell o-grid__cell--offset-25 o-grid__cell--width-50">
+            <a href="/"><img class="o-image" src="images/logo.png"></a>
+          </h1>
+        </div>
+
+        <div class="product-name">Property <span style="color:#4caf50;">Config</span></div>
+
+        <div class="header__row u-pillar-box--medium">
+          For those who use C# for more than hobby projects, you would have come across the ubiquitous <code>System.Configuration</code> namespace. The namespace holds the classes the .NET framework uses to work on and with configuration files. The major issue with the default configuration namespace is that it is very opinionated about how configurations should be structured and saved <em>(see <code>app.config</code> and <code>web.config</code> for details)</em>. This library aims to address those issues.
+        </div>
+
+        <div class="header__row o-grid o-grid--small-full o-grid--medium-fit">
+          <div class="o-grid__cell u-letter-box--small">
+            <a class="c-button c-button--success c-button--block"
+               href="https://www.nuget.org/packages/PropertyConfig.dll/">NUGET</a>
+          </div>
+          <div class="o-grid__cell u-letter-box--small">
+            <a class="c-button c-button--block"
+               href="https://github.com/bolorundurowb/PropertyConfig">SOURCE</a>
+          </div>
+        </div>
+
+        <div class="header__row">
+          <small>
+            <a class="c-link" href="https://twitter.com/Mr_Bolorunduro">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+            <a class="c-link u-pillar-box--medium" href="https://github.com/bolorundurowb">
+              <i class="fa fa-github-alt"></i> Github
+            </a>
+          </small>
+        </div>
+        <span class="c-badge c-badge--error u-pillar-box--medium">v1.0.2</span>
+      </div>
+    </div>
+
+    <div class="header header--secondary">
+      <div class="o-container o-container--xlarge">
+        <div class="o-grid o-grid--wrap o-grid--small-full o-grid--medium-full">
+          <div class="o-grid__cell o-grid__cell--width-100">
+            <h2 class="c-heading c-heading--large">Usage</h2>
+            <p class="c-paragraph">
+              Get the library from Nuget by using a GUI or a package manager<br>
+              <code>Install-Package PropertyConfig.dll</code>
+              <br><br>
+
+              Add the directive to your class file:<br>
+              <code>using PropertyConfig;</code>
+              <br><br>
+
+              Instantiate the class (preferably in the main entry class and storing it in a static variable)<br>
+              <code>public static Configuration configuration = new Configuration();</code>
+              <br><br>
+
+              Add whatever properties necessary, for example
+              <br>
+
+              <code>configuration["Hello"] = "World";<br>
+              //or<br>
+                configuration.Add("Hello", "World");</code>
+              <br><br>
+
+              After including every property, save the configuration<br>
+              <code>configuration.StoreToXml(); //saves to the default 'config.xml'<br>
+              //or<br>
+              configuration.StoreToXml(/*path to custom xml file*/); //saves to specified xml file<br>
+              //or<br>
+                configuration.StoreToXml(/*path to custom xml file*/, /*comment to add to config files*/);</code>
+              <br><br>
+
+              this produces an output that looks like<br>
+              <img src="images/xml-output.jpeg">
+              <br><br>
+
+              To load a config file<br>
+              <code>configuration.LoadFromXml() //loads from default 'config.xml'<br>
+              //or<br>
+                configuration.LoadFromXml(/*path to custom xml file*/); //saves to specified xml file</code>
+              <br><br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header header--tertiary">
+      <div class="o-container o-container--xlarge">
+        <div class="o-grid o-grid--wrap o-grid--small-full o-grid--medium-full">
+          <div class="o-grid__cell o-grid__cell--width-100">
+            <h2 class="c-heading c-heading--large">Property Config Features</h2>
+            <p class="c-paragraph">
+              Property Config has the following features; You can save configuration files as XML. It allows for loading, modifying and saving of configuration files with minimal amount of code. It is beginner friendly.
+            </p>
+          </div>
+          <div class="o-grid__cell o-grid__cell--width-100">
+            <h2 class="c-heading c-heading--large">Changelog</h2>
+            <h3 class="c-heading c-heading--medium">v1.0.2</h3>
+            <p class="c-paragraph">
+              It adds the default features for saving and loading XML config files.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
