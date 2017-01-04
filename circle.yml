@@ -14,8 +14,8 @@ dependencies:
 
 test:
   override:
-    - nuget install NUnit.Runners -Version 3.0.1 -OutputDirectory tools
-	  - mono ./tools/NUnit.Console.3.0.1/tools/nunit3-console.exe -workers 1 `(find . -name *Tests.dll | grep -v obj/Debug | grep -v obj/Release)`
+    - mono ./nuget.exe install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
+    - mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./PropertyConfig.Tests/bin/Debug/PropertyConfig.Tests.dll
     - mono ./tools/SharpCover.exe instrument ./coverageConfig.json
     - mono ./tools/SharpCover.exe check
     - bash <(curl -s https://codecov.io/bash)
