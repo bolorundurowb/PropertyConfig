@@ -3,7 +3,7 @@ solution: PropertyConfig.sln
 mono:
   - latest
 script:
-  - xbuild /p:Configuration=Release AutoBackUp.sln
+  - xbuild /p:Configuration=Release PropertyConfig.sln
   - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
   - mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
 after_script:
