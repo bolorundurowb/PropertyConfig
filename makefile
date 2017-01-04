@@ -9,7 +9,6 @@ compile: clean
 
 test: 
 	mono ./nuget.exe install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
-	mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe -workers 1 ./PropertyConfig.Tests/bin/Debug/PropertyConfig.Tests.dll
 
 instrument:
 	mono ./tools/SharpCover.exe instrument ./coverageConfig.json
