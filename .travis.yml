@@ -2,12 +2,11 @@ language: csharp
 solution: PropertyConfig.sln
 mono:
   - latest
-before_script:
-  - nuget restore PropertyConfig.sln
 script:
   - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
   - pwd && ls
-  - mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./PropertyConfig.Tests/bin/Debug/PropertyConfig.Tests.dll
+  - mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
+after_script:
   - mono ./tools/SharpCover.exe instrument ./coverageConfig.json
   - mono ./tools/SharpCover.exe check
   - bash <(curl -s https://codecov.io/bash)
