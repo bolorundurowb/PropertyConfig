@@ -8,7 +8,7 @@ compile: clean
 	xbuild /p:TargetFrameworkVersion="v4.5" /p:Configuration=Release PropertyConfig.sln
 
 test: 
-	nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
+	mono ./nuget.exe install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
 	mono ./tools/NUnit.Console.3.5.0/tools/nunit3-console.exe -workers 1 `(find Tests -name *Tests.dll | grep -v obj/Release)`
 
 coverageconfig:
