@@ -16,7 +16,7 @@ coverageconfig:
 	chmod +x ./generateCoverageConfig.sh
 	./generateCoverageConfig.sh > ./coverageConfig.json
 
-instrument:
+instrument:	coverageconfig
 	mono ./tools/SharpCover.exe instrument ./coverageConfig.json
 
 coverage: compile instrument test
