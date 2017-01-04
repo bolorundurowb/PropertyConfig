@@ -4,7 +4,7 @@ clean:
 
 
 compile: clean 
-	nuget restore PropertyConfig.sln
+	mono ./nuget.exe restore PropertyConfig.sln
 	xbuild /p:TargetFrameworkVersion="v4.5" /p:Configuration=Release PropertyConfig.sln
 
 test: 
