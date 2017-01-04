@@ -9,6 +9,7 @@ compile: clean
 
 test: 
 	mono ./nuget.exe install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
+	ls ./PropertyConfig.Tests/bin/Debug/
 	mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./PropertyConfig.Tests/bin/Debug/PropertyConfig.Tests.dll
 
 instrument:
