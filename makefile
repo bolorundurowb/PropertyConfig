@@ -12,7 +12,7 @@ test:
 	mono ./tools/NUnit.Console.3.5.0/tools/nunit3-console.exe -workers 1 `(find Tests -name *Tests.dll | grep -v obj/Release)`
 
 coverageconfig:
-  chmod +x ./generateCoverageConfig.sh
+	chmod +x ./generateCoverageConfig.sh
 	./generateCoverageConfig.sh > ./coverageConfig.json
 
 instrument: coverageconfig
