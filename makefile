@@ -10,7 +10,7 @@ compile: clean
 test: 
 	mono ./nuget.exe install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
 	ls tools
-	mono ./tools/NUnit.Console.3.5.0/tools/nunit3-console.exe -workers 1 `(find . -name *Tests.dll | grep -v obj/Release)`
+	mono ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe -workers 1 `(find . -name *Tests.dll | grep -v obj/Release)`
 
 coverageconfig:
 	chmod +x ./generateCoverageConfig.sh
