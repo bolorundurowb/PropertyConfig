@@ -1,6 +1,7 @@
 # PropertyConfig
 
-[![CircleCI](https://circleci.com/gh/bolorundurowb/PropertyConfig.svg?style=svg)](https://circleci.com/gh/bolorundurowb/PropertyConfig)
+[![Build Status](https://travis-ci.org/bolorundurowb/PropertyConfig.svg?branch=develop)](https://travis-ci.org/bolorundurowb/PropertyConfig) [![codecov](https://codecov.io/gh/bolorundurowb/PropertyConfig/branch/master/graph/badge.svg)](https://codecov.io/gh/bolorundurowb/PropertyConfig)
+
 
 ## Description
 

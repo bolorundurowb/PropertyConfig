@@ -1,0 +1,5 @@
+{
+  "assemblies": ["./PropertyConfig/bin/Release/PropertyConfig.dll", "./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll"], 
+  "typeInclude": "PropertyConfig.*", 
+  "typeExclude": "PropertyConfig.*Tests*"
+}
