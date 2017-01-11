@@ -20,7 +20,7 @@ script:
   - xbuild /p:Configuration=Release PropertyConfig.sln
   - export LD_LIBRARY_PATH=/usr/local/lib
   - nuget install NUnit.Runners -Version 3.0.1 -OutputDirectory tools
-  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+PropertyConfig ./tools/NUnit.ConsoleRunner.3.0.1/tools/nunit3-console.exe --process=Single ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
+  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+PropertyConfig ./tools/NUnit.Console.3.0.1/tools/nunit3-console.exe --process=Single ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
   - monocov --export-xml=monocovCoverage monocovCoverage.cov
   - cat monocovCoverage.cov
   - ls monocovCoverage
