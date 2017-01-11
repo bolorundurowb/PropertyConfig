@@ -1,6 +1,6 @@
 # PropertyConfig
 
-[![Build Status](https://travis-ci.org/bolorundurowb/PropertyConfig.svg?branch=develop)](https://travis-ci.org/bolorundurowb/PropertyConfig) [![codecov](https://codecov.io/gh/bolorundurowb/PropertyConfig/branch/master/graph/badge.svg)](https://codecov.io/gh/bolorundurowb/PropertyConfig)
+[![Build Status](https://travis-ci.org/bolorundurowb/PropertyConfig.svg?branch=develop)](https://travis-ci.org/bolorundurowb/PropertyConfig) [![Coverage Status](https://coveralls.io/repos/github/bolorundurowb/PropertyConfig/badge.svg)](https://coveralls.io/github/bolorundurowb/PropertyConfig)
 
 
 ## Description
