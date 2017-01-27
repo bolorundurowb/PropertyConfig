@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -86,6 +87,51 @@ namespace PropertyConfig
                 File.Delete(filePath);
             }
             xmlDocument.Save(filePath);
+        }
+
+        /// <summary>
+        /// Retrieve the value at a particular key
+        /// </summary>
+        /// <param name="key">A string key</param>
+        /// <returns>The corresponding value</returns>
+        public string GetProperty(string key)
+        {
+            return this[key];
+        }
+
+        /// <summary>
+        /// Retrieve the value at a particular key or return a default
+        /// </summary>
+        /// <param name="key">A string key</param>
+        /// <param name="defaultValue">The value to be returned  if the value is null</param>
+        /// <returns>The correspnding value or default</returns>
+        public string GetProperty(string key, string defaultValue)
+        {
+            var value = this[key];
+            if (value == null)
+            {
+                return defaultValue;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Retrieve all the property keys
+        /// </summary>
+        /// <returns>An IEnumerable containing all the keys</returns>
+        public IEnumerable<string> PropertyNames()
+        {
+            return this.AllKeys;
+        }
+
+        /// <summary>
+        /// Writes a value to a particular key
+        /// </summary>
+        /// <param name="key">A string key</param>
+        /// <param name="value">A string value</param>
+        public void SetProperty(string key, string value)
+        {
+            this[key] = value;
         }
     }
 }
