@@ -23,6 +23,7 @@ after_script:
   - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
   - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+[PropertyConfig], -[PropertyConfig.Tests] ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe --process=Single ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
   - monocov --export-xml=monocovCoverage monocovCoverage.cov
+  - cat monocovCoverage.cov
   - ls monocovCoverage
   - REPO_COMMIT_AUTHOR=$(git show -s --pretty=format:"%cn")
   - REPO_COMMIT_AUTHOR_EMAIL=$(git show -s --pretty=format:"%ce")
