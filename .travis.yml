@@ -21,18 +21,11 @@ script:
 after_script:
   - export LD_LIBRARY_PATH=/usr/local/lib
   - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory tools
-  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+[PropertyConfig] ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe --process=Single ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
+  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+[PropertyConfig], -[PropertyConfig.Tests] ./tools/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe --process=Single ./PropertyConfig.Tests/bin/Release/PropertyConfig.Tests.dll
   - monocov --export-xml=monocovCoverage monocovCoverage.cov
-  - cat monocovCoverage.cov
   - ls monocovCoverage
   - REPO_COMMIT_AUTHOR=$(git show -s --pretty=format:"%cn")
   - REPO_COMMIT_AUTHOR_EMAIL=$(git show -s --pretty=format:"%ce")
   - REPO_COMMIT_MESSAGE=$(git show -s --pretty=format:"%s")
-  - echo $TRAVIS_COMMIT
-  - echo $TRAVIS_BRANCH
-  - echo $REPO_COMMIT_AUTHOR
-  - echo $REPO_COMMIT_AUTHOR_EMAIL
-  - echo $REPO_COMMIT_MESSAGE
-  - echo $TRAVIS_JOB_ID
   - nuget install coveralls.net -Version 0.7.0 -OutputDirectory tools
   - mono ./tools/coveralls.net.0.7.0/tools/csmacnz.Coveralls.exe --monocov -i ./monocovCoverage --repoToken $REPO_TOKEN --commitId $TRAVIS_COMMIT --commitBranch $TRAVIS_BRANCH --commitAuthor "$REPO_COMMIT_AUTHOR" --commitEmail "$REPO_COMMIT_AUTHOR_EMAIL" --commitMessage "$REPO_COMMIT_MESSAGE" --jobId $TRAVIS_JOB_ID  --serviceName travis-ci  --useRelativePaths
