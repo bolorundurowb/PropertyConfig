@@ -36,12 +36,14 @@ namespace PropertyConfig
                 throw new FileNotFoundException("The given file doesn't exist.");
             }
             XmlDocument xmlDocument = new XmlDocument();
-            var stream = new FileStream(filePath, FileMode.Open);
-            xmlDocument.Load(stream);
-            if (xmlDocument.DocumentElement == null) return;
-            foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
-                this[node.Name] = node.InnerText;
+                xmlDocument.Load(stream);
+                if (xmlDocument.DocumentElement == null) return;
+                foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
+                {
+                    this[node.Name] = node.InnerText;
+                }
             }
         }
 
@@ -87,7 +89,10 @@ namespace PropertyConfig
             {
                 File.Delete(filePath);
             }
-            xmlDocument.Save(File.OpenWrite(filePath));
+            using (var stream = File.OpenWrite(filePath))
+            {
+                xmlDocument.Save(stream);
+            }
         }
 
         /// <summary>
