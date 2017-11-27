@@ -36,7 +36,8 @@ namespace PropertyConfig
                 throw new FileNotFoundException("The given file doesn't exist.");
             }
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(filePath);
+            var stream = new FileStream(filePath, FileMode.Open);
+            xmlDocument.Load(stream);
             if (xmlDocument.DocumentElement == null) return;
             foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
             {
