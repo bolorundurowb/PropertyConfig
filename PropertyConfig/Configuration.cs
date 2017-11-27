@@ -87,7 +87,7 @@ namespace PropertyConfig
             {
                 File.Delete(filePath);
             }
-            xmlDocument.Save(filePath);
+            xmlDocument.Save(File.OpenWrite(filePath));
         }
 
         /// <summary>
