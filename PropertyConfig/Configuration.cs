@@ -14,7 +14,7 @@ namespace PropertyConfig
         /// <summary>
         /// The file path to save the config to. It defaults to "config.xml"
         /// </summary>
-        public string FilePath { get; set; } = "config.xml";
+        public string FilePath { get; } = "config.xml";
 
         /// <summary>
         /// Loads the config from the path stored in the FilePath property
@@ -35,11 +35,17 @@ namespace PropertyConfig
             {
                 throw new FileNotFoundException("The given file doesn't exist.");
             }
+
             XmlDocument xmlDocument = new XmlDocument();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 xmlDocument.Load(stream);
-                if (xmlDocument.DocumentElement == null) return;
+
+                if (xmlDocument.DocumentElement == null)
+                {
+                    return;
+                }
+                
                 foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
                 {
                     this[node.Name] = node.InnerText;
@@ -61,7 +67,7 @@ namespace PropertyConfig
         /// <param name="filePath">The specified path to save the config to</param>
         public void StoreToXml(string filePath)
         {
-            const string comment = "Created by Property Config";
+            string comment = $"created by property config, version: {Constants.LibVersion}";
             StoreToXml(filePath, comment);
         }
 
@@ -74,21 +80,28 @@ namespace PropertyConfig
         {
             XmlDocument xmlDocument = new XmlDocument();
             var root = xmlDocument.CreateElement("config");
+
             // Insert Comment
             var xmlComment = xmlDocument.CreateComment(comment);
             root.AppendChild(xmlComment);
-            var allConfigs = AllKeys.Distinct();
-            foreach (var pair in allConfigs)
+
+            var allKeys = AllKeys;
+            foreach (var key in allKeys)
             {
-                var configItem = xmlDocument.CreateElement(pair);
-				configItem.InnerText = this[pair];
+                var configItem = xmlDocument.CreateElement(key);
+                configItem.InnerText = this[key];
                 root.AppendChild(configItem);
             }
+
             xmlDocument.AppendChild(root);
+
+            // check for existence of file, delete if it exists
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
+
+            // write the config
             using (var stream = File.OpenWrite(filePath))
             {
                 xmlDocument.Save(stream);
@@ -118,6 +131,7 @@ namespace PropertyConfig
             {
                 return defaultValue;
             }
+
             return value;
         }
 
@@ -127,7 +141,7 @@ namespace PropertyConfig
         /// <returns>An IEnumerable containing all the keys</returns>
         public IEnumerable<string> PropertyNames()
         {
-            return this.AllKeys;
+            return AllKeys;
         }
 
         /// <summary>

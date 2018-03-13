@@ -7,6 +7,8 @@
 
 This library is developed to provide similar functionality to Java's `java.util.Properties` class. It allows for the flat storing of name-value pairs in XML.
 
+**NOTE: from v2.0.0, the `FilePath` property has become readonly as it doesn't make sense to leave it open to modification**
+
 ## Usage
 Get the library from Nuget by using your package manager or by running;
 
