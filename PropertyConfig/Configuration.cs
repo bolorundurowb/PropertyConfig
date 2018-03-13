@@ -74,21 +74,27 @@ namespace PropertyConfig
         {
             XmlDocument xmlDocument = new XmlDocument();
             var root = xmlDocument.CreateElement("config");
+            
             // Insert Comment
             var xmlComment = xmlDocument.CreateComment(comment);
             root.AppendChild(xmlComment);
-            var allConfigs = AllKeys.Distinct();
-            foreach (var pair in allConfigs)
+            
+            var allKeys = AllKeys;
+            foreach (var key in allKeys)
             {
-                var configItem = xmlDocument.CreateElement(pair);
-				configItem.InnerText = this[pair];
+                var configItem = xmlDocument.CreateElement(key);
+				configItem.InnerText = this[key];
                 root.AppendChild(configItem);
             }
             xmlDocument.AppendChild(root);
+            
+            // check for existence of file, delete if it exists
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
+            
+            // write the config
             using (var stream = File.OpenWrite(filePath))
             {
                 xmlDocument.Save(stream);
@@ -127,7 +133,7 @@ namespace PropertyConfig
         /// <returns>An IEnumerable containing all the keys</returns>
         public IEnumerable<string> PropertyNames()
         {
-            return this.AllKeys;
+            return AllKeys;
         }
 
         /// <summary>
