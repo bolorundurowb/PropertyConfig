@@ -14,7 +14,7 @@ namespace PropertyConfig
         /// <summary>
         /// The file path to save the config to. It defaults to "config.xml"
         /// </summary>
-        public string FilePath { get; set; } = "config.xml";
+        public string FilePath { get; } = "config.xml";
 
         /// <summary>
         /// Loads the config from the path stored in the FilePath property
