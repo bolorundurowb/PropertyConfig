@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>PropertyConfig.dll</PackageId>
     <Authors>Bolorunduro Winner-Timothy</Authors>
@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/bolorundurowb/PropertyConfig</RepositoryUrl>
     <PackageTags>Config XML Configuration File Properties Java flat name-value</PackageTags>
     <PackageIconUrl>http://themacadmin.com/tma3/wp-content/uploads/2013/08/osxConfigProfileIcon.png</PackageIconUrl>
+    <PackageReleaseNotes>update code structure</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -20,8 +21,5 @@
   <ItemGroup>
     <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib" />
   </ItemGroup>
 </Project>

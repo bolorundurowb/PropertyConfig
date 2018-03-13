@@ -35,11 +35,17 @@ namespace PropertyConfig
             {
                 throw new FileNotFoundException("The given file doesn't exist.");
             }
+
             XmlDocument xmlDocument = new XmlDocument();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 xmlDocument.Load(stream);
-                if (xmlDocument.DocumentElement == null) return;
+
+                if (xmlDocument.DocumentElement == null)
+                {
+                    return;
+                }
+                
                 foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
                 {
                     this[node.Name] = node.InnerText;
@@ -61,7 +67,7 @@ namespace PropertyConfig
         /// <param name="filePath">The specified path to save the config to</param>
         public void StoreToXml(string filePath)
         {
-            const string comment = "Created by Property Config";
+            string comment = $"created by property config, version: {Constants.LibVersion}";
             StoreToXml(filePath, comment);
         }
 
@@ -74,26 +80,27 @@ namespace PropertyConfig
         {
             XmlDocument xmlDocument = new XmlDocument();
             var root = xmlDocument.CreateElement("config");
-            
+
             // Insert Comment
             var xmlComment = xmlDocument.CreateComment(comment);
             root.AppendChild(xmlComment);
-            
+
             var allKeys = AllKeys;
             foreach (var key in allKeys)
             {
                 var configItem = xmlDocument.CreateElement(key);
-				configItem.InnerText = this[key];
+                configItem.InnerText = this[key];
                 root.AppendChild(configItem);
             }
+
             xmlDocument.AppendChild(root);
-            
+
             // check for existence of file, delete if it exists
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
-            
+
             // write the config
             using (var stream = File.OpenWrite(filePath))
             {
@@ -124,6 +131,7 @@ namespace PropertyConfig
             {
                 return defaultValue;
             }
+
             return value;
         }
 
