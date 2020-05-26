@@ -5,14 +5,16 @@
     <PackageId>PropertyConfig.dll</PackageId>
     <Authors>Bolorunduro Winner-Timothy</Authors>
     <Description>This library is developed to provide similar functionality to Java's java.util.Properties class. It allows for the flat storing of name-value pairs in XML</Description>
-    <Copyright>Copyright 2017</Copyright>
+    <Copyright>Copyright 2020</Copyright>
     <PackageLicenseUrl>https://github.com/bolorundurowb/PropertyConfig/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/bolorundurowb/PropertyConfig</PackageProjectUrl>
     <RepositoryUrl>https://github.com/bolorundurowb/PropertyConfig</RepositoryUrl>
     <PackageTags>Config XML Configuration File Properties Java flat name-value</PackageTags>
     <PackageIconUrl>http://themacadmin.com/tma3/wp-content/uploads/2013/08/osxConfigProfileIcon.png</PackageIconUrl>
     <PackageReleaseNotes>update code structure</PackageReleaseNotes>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard1.0;netstandard1.1;netstandard1.2;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard1.7;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>Property Config</Title>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
