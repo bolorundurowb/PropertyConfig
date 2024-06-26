@@ -1,6 +1,7 @@
 # PropertyConfig
 
-[![Build Status](https://travis-ci.org/bolorundurowb/PropertyConfig.svg?branch=develop)](https://travis-ci.org/bolorundurowb/PropertyConfig) [![Coverage Status](https://coveralls.io/repos/github/bolorundurowb/PropertyConfig/badge.svg?branch=master)](https://coveralls.io/github/bolorundurowb/PropertyConfig?branch=master) [![Method Parity](https://img.shields.io/badge/method----parity-6%20%2F%2015-yellowgreen.svg)]() [![NuGet Badge](https://buildstats.info/nuget/propertyconfig.dll)](https://www.nuget.org/packages/PropertyConfig.dll/) 
+[![Build, Test & Cover](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/bolorundurowb/PropertyConfig/badge.svg?branch=master)](https://coveralls.io/github/bolorundurowb/PropertyConfig?branch=master) [![Method Parity](https://img.shields.io/badge/method----parity-6%20%2F%2015-yellowgreen.svg)]() [![NuGet Badge](https://buildstats.info/nuget/propertyconfig.dll)](https://www.nuget.org/packages/PropertyConfig.dll/) 
 
 
 ## Description
