@@ -5,26 +5,26 @@ using NUnit.Framework;
 namespace PropertyConfig.Tests
 {
     [TestFixture]
-    public class ConfigurationTests
+    public class PropertiesTests
     {
         [Test]
         public void RetrieveNonExistentProperty()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             Assert.AreEqual(configuration.GetProperty("Hello"), null);
         }
 
         [Test]
         public void RetrieveNonExistingPropertyWithDefaultTest()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             Assert.AreEqual(configuration.GetProperty("Hello", "xxxx"), "xxxx");
         }
 
         [Test]
         public void RetrieveExistingPropertyWithDefaultTest()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             configuration.SetProperty("Hello", "World");
             Assert.AreEqual(configuration.GetProperty("Hello", "xxxx"), "World");
         }
@@ -32,7 +32,7 @@ namespace PropertyConfig.Tests
         [Test]
         public void RetrieveAllKeysTest()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             configuration.SetProperty("Hello", "World");
             var keys = configuration.PropertyNames();
             Assert.AreEqual(keys.Count(), 1);
@@ -42,7 +42,7 @@ namespace PropertyConfig.Tests
 		public void LibraryIsStable()
 		{
 			Assert.DoesNotThrow(delegate {
-				var configuration = new Configuration();
+				var configuration = new Properties();
 				configuration["Hello"] = "World";
 				configuration.StoreToXml();
 			});
@@ -52,7 +52,7 @@ namespace PropertyConfig.Tests
         public void StorePropertiesWithDefaultPath()
         {
             Assert.DoesNotThrow(delegate {
-                var configuration = new Configuration();
+                var configuration = new Properties();
                 configuration["Hello"] = "World";
                 configuration.StoreToXml();
             });
@@ -63,7 +63,7 @@ namespace PropertyConfig.Tests
         public void StorePropertiesWithSpecifiedPath()
         {
             Assert.DoesNotThrow(delegate {
-                var configuration = new Configuration();
+                var configuration = new Properties();
                 configuration["Marco"] = "Polo";
                 configuration.StoreToXml("./../special.xml");
             });
@@ -74,7 +74,7 @@ namespace PropertyConfig.Tests
         [Test]
         public void LoadConfigFromDefaultPath()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             Assert.DoesNotThrow(delegate
             {
 				configuration["Hello"] = "World";
@@ -87,7 +87,7 @@ namespace PropertyConfig.Tests
         [Test]
         public void LoadConfigFromSpecifiedPath()
         {
-            var configuration = new Configuration();
+            var configuration = new Properties();
             Assert.DoesNotThrow(delegate
             {
 				configuration["marco"] = "polo x ";
