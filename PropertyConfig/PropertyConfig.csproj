@@ -12,7 +12,7 @@
     <PackageTags>Config XML Configuration File Properties Java flat name-value</PackageTags>
     <PackageIconUrl>http://themacadmin.com/tma3/wp-content/uploads/2013/08/osxConfigProfileIcon.png</PackageIconUrl>
     <PackageReleaseNotes>update namespaces and class names</PackageReleaseNotes>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <LangVersion>default</LangVersion>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
