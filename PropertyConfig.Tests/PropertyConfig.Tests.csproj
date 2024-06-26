@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <LangVersion>default</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2">
@@ -19,5 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PropertyConfig\PropertyConfig.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="test-config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use .NET 8 SDK
         uses: actions/setup-dotnet@v4
@@ -27,7 +27,7 @@ jobs:
         run: dotnet test PropertyConfig.sln /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
 
       - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v1.1.2
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ github.token }}
-          path-to-lcov: ${{ github.workspace }}/PropertyConfig.Tests/coverage/coverage.info
+          file: ${{ github.workspace }}/PropertyConfig.Tests/coverage/coverage.info

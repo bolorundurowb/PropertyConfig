@@ -1,9 +1,22 @@
-﻿namespace PropertyConfig
+﻿using System.Reflection;
+
+namespace PropertyConfig;
+
+internal static class Constants
 {
-    internal static class Constants
+    internal const string RootElementKey = "properties";
+    
+    internal const string CommentElementKey = "comment";
+    
+    internal const string EntryElementKey = "entry";
+    
+    internal const string KeyAttributeKey = "key";
+    
+    internal static string LibVersion => GetAssemblyVersion();
+    
+    private static string GetAssemblyVersion()
     {
-        // chose to hard-code this because the logic for getting the executing
-        // library is too complicated for a small library such as this
-        internal static string LibVersion => "2.0.0";
+        var assembly = typeof(Properties).GetTypeInfo().Assembly;
+        return assembly.GetName().Version.ToString();
     }
 }
