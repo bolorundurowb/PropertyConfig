@@ -40,8 +40,14 @@ public class Properties : NameValueCollection
         if (xmlDocument.DocumentElement == null)
             return;
 
-        foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes[0])
-            this[node.Name] = node.InnerText;
+        foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
+        {
+            if (node.Name == Constants.EntryElementKey)
+            {
+                var key = node.Attributes[Constants.KeyAttributeKey].Value;
+                this[key] = node.InnerText;
+            }
+        }
     }
 
     /// <summary>
@@ -67,18 +73,25 @@ public class Properties : NameValueCollection
     public void StoreToXml(string filePath, string comment)
     {
         var xmlDocument = new XmlDocument();
-        var root = xmlDocument.CreateElement("config");
+
+        // Insert Header
+        var headerElement = xmlDocument.CreateXmlDeclaration("1.0", "UTF-8", null);
+        xmlDocument.AppendChild(headerElement);
+
+        var root = xmlDocument.CreateElement(Constants.RootElementKey);
 
         // Insert Comment
-        var xmlComment = xmlDocument.CreateComment(comment);
-        root.AppendChild(xmlComment);
+        var commentElement = xmlDocument.CreateElement(Constants.CommentElementKey);
+        commentElement.InnerText = comment;
+        root.AppendChild(commentElement);
 
         var allKeys = AllKeys;
         foreach (var key in allKeys)
         {
-            var configItem = xmlDocument.CreateElement(key);
-            configItem.InnerText = this[key];
-            root.AppendChild(configItem);
+            var entryElement = xmlDocument.CreateElement(Constants.EntryElementKey);
+            entryElement.SetAttribute(Constants.KeyAttributeKey, key);
+            entryElement.InnerText = this[key];
+            root.AppendChild(entryElement);
         }
 
         xmlDocument.AppendChild(root);

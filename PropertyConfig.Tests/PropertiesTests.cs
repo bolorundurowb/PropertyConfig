@@ -79,28 +79,31 @@ public class PropertiesTests
     [Test]
     public void LoadConfigFromDefaultPath()
     {
-        var configuration = new Properties();
-        configuration.Invoking(c =>
+        var firstConfig = new Properties
         {
-            c["Hello"] = "World";
-            c.StoreToXml();
-            c.LoadFromXml();
-        }).Should().NotThrow();
+            ["Hello"] = "World"
+        };
+        firstConfig.StoreToXml();
+
+        var configuration = new Properties();
+        configuration.LoadFromXml();
 
         configuration["Hello"].Should().Be("World");
     }
 
     [Test]
-    public void LoadConfigFromSpecifiedPath()
+    public void LoadConfigFromNonExistentFile()
     {
         var configuration = new Properties();
-        configuration.Invoking(c =>
-        {
-            c["marco"] = "polo x ";
-            c.StoreToXml("file1.xml");
-            c.LoadFromXml("file1.xml");
-        }).Should().NotThrow();
+        configuration.Invoking(c => { c.LoadFromXml("does-not-exist.xml"); }).Should()
+            .ThrowExactly<FileNotFoundException>();
+    }
 
-        configuration["marco"].Should().Be("polo x ");
+    [Test]
+    public void LoadConfigFromSpecifiedFile()
+    {
+        var configuration = new Properties();
+        configuration.LoadFromXml("test-config.xml");
+        configuration["Hello"].Should().Be("Mum");
     }
 }

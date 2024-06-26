@@ -22,4 +22,9 @@
   <ItemGroup>
     <ProjectReference Include="..\PropertyConfig\PropertyConfig.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="test-config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

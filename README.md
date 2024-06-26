@@ -43,10 +43,10 @@ configuration.StoreToXml("my-config.xml", "Do not modify manually"); // saves to
 
 this produces an output that looks like
 ```xml
-<config>
+<properties>
   <!--Do not modify manually-->
   <Hello>World</Hello>
-</config>
+</properties>
 ```
 
 To load a config file
