@@ -1,9 +1,8 @@
-﻿namespace PropertyConfig
+﻿namespace PropertyConfig;
+
+internal static class Constants
 {
-    internal static class Constants
-    {
-        // chose to hard-code this because the logic for getting the executing
-        // library is too complicated for a small library such as this
-        internal static string LibVersion => "2.0.0";
-    }
+    // chose to hard-code this because the logic for getting the executing
+    // library is too complicated for a small library such as this
+    internal static string LibVersion => "2.0.0";
 }
