@@ -13,7 +13,7 @@ public class Properties : NameValueCollection
     /// <summary>
     /// The file path to save the config to. It defaults to "config.xml"
     /// </summary>
-    public string FilePath { get; set; } = "config.xml";
+    public string FilePath { get; private set; } = "config.xml";
 
     /// <summary>
     /// Loads the config from the path stored in the FilePath property
@@ -29,6 +29,9 @@ public class Properties : NameValueCollection
     {
         if (!File.Exists(filePath))
             throw new FileNotFoundException("The given file doesn't exist.");
+
+        // set the file path this was read from
+        this.FilePath = filePath;
 
         var xmlDocument = new XmlDocument();
         using var stream = new FileStream(filePath, FileMode.Open);
