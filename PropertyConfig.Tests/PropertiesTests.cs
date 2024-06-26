@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace PropertyConfig.Tests;
@@ -10,14 +12,14 @@ public class PropertiesTests
     public void RetrieveNonExistentProperty()
     {
         var configuration = new Properties();
-        Assert.AreEqual(configuration.GetProperty("Hello"), null);
+        configuration.GetProperty("Hello").Should().BeNull();
     }
 
     [Test]
     public void RetrieveNonExistingPropertyWithDefaultTest()
     {
         var configuration = new Properties();
-        Assert.AreEqual(configuration.GetProperty("Hello", "xxxx"), "xxxx");
+        configuration.GetProperty("Hello", "xxxx").Should().Be("xxxx");
     }
 
     [Test]
@@ -25,7 +27,7 @@ public class PropertiesTests
     {
         var configuration = new Properties();
         configuration.SetProperty("Hello", "World");
-        Assert.AreEqual(configuration.GetProperty("Hello", "xxxx"), "World");
+        configuration.GetProperty("Hello", "xxxx").Should().Be("World");
     }
 
     [Test]
@@ -34,68 +36,71 @@ public class PropertiesTests
         var configuration = new Properties();
         configuration.SetProperty("Hello", "World");
         var keys = configuration.PropertyNames();
-        Assert.AreEqual(keys.Count(), 1);
+        keys.Count().Should().Be(1);
     }
 
     [Test]
     public void LibraryIsStable()
     {
-        Assert.DoesNotThrow(delegate
+        var configuration = new Properties();
+        configuration.Invoking(c =>
         {
-            var configuration = new Properties();
-            configuration["Hello"] = "World";
-            configuration.StoreToXml();
-        });
+            c["Hello"] = "World";
+            c.StoreToXml();
+        }).Should().NotThrow();
     }
 
     [Test]
     public void StorePropertiesWithDefaultPath()
     {
-        Assert.DoesNotThrow(delegate
+        var configuration = new Properties();
+        configuration.Invoking(c =>
         {
-            var configuration = new Properties();
-            configuration["Hello"] = "World";
-            configuration.StoreToXml();
-        });
-        FileAssert.Exists("config.xml");
+            c["Hello"] = "World";
+            c.StoreToXml();
+        }).Should().NotThrow();
+
+        File.Exists("config.xml").Should().BeTrue();
     }
 
     [Test]
     public void StorePropertiesWithSpecifiedPath()
     {
-        Assert.DoesNotThrow(delegate
+        var configuration = new Properties();
+        configuration.Invoking(c =>
         {
-            var configuration = new Properties();
-            configuration["Marco"] = "Polo";
-            configuration.StoreToXml("./../special.xml");
-        });
+            c["Marco"] = "Polo";
+            c.StoreToXml("./../special.xml");
+        }).Should().NotThrow();
 
-        FileAssert.Exists("./../special.xml");
+        File.Exists("./../special.xml").Should().BeTrue();
     }
 
     [Test]
     public void LoadConfigFromDefaultPath()
     {
         var configuration = new Properties();
-        Assert.DoesNotThrow(delegate
+        configuration.Invoking(c =>
         {
-            configuration["Hello"] = "World";
-            configuration.StoreToXml();
-            configuration.LoadFromXml();
-        });
-        Assert.AreEqual(configuration["Hello"], "World");
+            c["Hello"] = "World";
+            c.StoreToXml();
+            c.LoadFromXml();
+        }).Should().NotThrow();
+
+        configuration["Hello"].Should().Be("World");
     }
 
     [Test]
     public void LoadConfigFromSpecifiedPath()
     {
         var configuration = new Properties();
-        Assert.DoesNotThrow(delegate
+        configuration.Invoking(c =>
         {
-            configuration["marco"] = "polo x ";
-            configuration.StoreToXml("file1.xml");
-            configuration.LoadFromXml("file1.xml");
-        });
-        Assert.AreEqual(configuration["marco"], "polo x ");
+            c["marco"] = "polo x ";
+            c.StoreToXml("file1.xml");
+            c.LoadFromXml("file1.xml");
+        }).Should().NotThrow();
+
+        configuration["marco"].Should().Be("polo x ");
     }
 }
