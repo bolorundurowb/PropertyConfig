@@ -30,4 +30,4 @@ jobs:
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ github.token }}
-          path-to-lcov: ${{ github.workspace }}/tests/PropertyConfig.Tests/coverage/coverage.info
+          path-to-lcov: ${{ github.workspace }}/PropertyConfig.Tests/coverage/coverage.info
