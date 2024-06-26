@@ -67,7 +67,7 @@ namespace PropertyConfig
         /// <param name="filePath">The specified path to save the config to</param>
         public void StoreToXml(string filePath)
         {
-            string comment = $"created by property config, version: {Constants.LibVersion}";
+            string comment = $"Created by property config, version: {Constants.LibVersion}";
             StoreToXml(filePath, comment);
         }
 
