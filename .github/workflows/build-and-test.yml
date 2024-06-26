@@ -24,10 +24,10 @@ jobs:
         run: dotnet build PropertyConfig.sln -c Release --no-restore
 
       - name: Run tests with code coverage
-        run: dotnet test PropertyConfig.sln /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../coverage/
+        run: dotnet test PropertyConfig.sln /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ github.token }}
-          path-to-lcov: ${{ github.workspace }}/coverage/coverage.info
+          path-to-lcov: ${{ github.workspace }}/PropertyConfig.Tests/coverage/coverage.info
