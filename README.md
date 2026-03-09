@@ -1,7 +1,8 @@
 # PropertyConfig
 
 [![Build, Test & Coverage](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/bolorundurowb/PropertyConfig/badge.svg?branch=master)](https://coveralls.io/github/bolorundurowb/PropertyConfig?branch=master) [![Method Parity](https://img.shields.io/badge/method----parity-6%20%2F%2015-yellowgreen.svg)]() [![NuGet Badge](https://buildstats.info/nuget/propertyconfig.dll)](https://www.nuget.org/packages/PropertyConfig.dll/) 
+[![codecov](https://codecov.io/gh/bolorundurowb/PropertyConfig/graph/badge.svg?token=u0KEsaYozN)](https://codecov.io/gh/bolorundurowb/PropertyConfig) [![Method Parity](https://img.shields.io/badge/method----parity-6%20%2F%2015-yellowgreen.svg)]()
+![NuGet Version](https://img.shields.io/nuget/v/PropertyConfig.dll)
 
 
 ## Description
