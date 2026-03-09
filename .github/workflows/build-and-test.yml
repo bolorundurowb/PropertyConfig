@@ -1,10 +1,10 @@
-name: Build, Test & Cover
+name: Build, Test & Coverage
 
 on:
   push:
     branches: [ master ]
   pull_request:
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   build-and-test:
@@ -12,22 +12,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use .NET 8 SDK
+      - name: Setup .NET 10 SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: '10.x'
 
       - name: Restore dependencies
-        run: dotnet restore PropertyConfig.sln
+        run: dotnet restore
+        working-directory: ./src
 
       - name: Build all projects
-        run: dotnet build PropertyConfig.sln -c Release --no-restore
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./src
 
       - name: Run tests with code coverage
-        run: dotnet test PropertyConfig.sln /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
+        run: dotnet test --configuration Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=../../coverage/coverage.cobertura.xml
+        working-directory: ./src
 
-      - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v2
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          github-token: ${{ github.token }}
-          file: ${{ github.workspace }}/PropertyConfig.Tests/coverage/coverage.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          fail_ci_if_error: true
