@@ -9,75 +9,77 @@ namespace PropertyConfig.Tests;
 public class PropertiesTests
 {
     [Test]
-    public void RetrieveNonExistentProperty()
+    public void GetProperty_WhenPropertyDoesNotExist_ReturnsNull()
     {
-        var configuration = new Properties();
-        configuration.GetProperty("Hello").Should().BeNull();
+        var properties = new Properties();
+        
+        properties.GetProperty("Hello").Should().BeNull();
     }
 
     [Test]
-    public void RetrieveNonExistingPropertyWithDefaultTest()
+    public void GetProperty_WhenPropertyDoesNotExistAndDefaultProvided_ReturnsDefaultValue()
     {
-        var configuration = new Properties();
-        configuration.GetProperty("Hello", "xxxx").Should().Be("xxxx");
+        var properties = new Properties();
+        
+        properties.GetProperty("Hello", "xxxx").Should().Be("xxxx");
     }
 
     [Test]
-    public void RetrieveExistingPropertyWithDefaultTest()
+    public void GetProperty_WhenPropertyExistsAndDefaultProvided_ReturnsActualValue()
     {
-        var configuration = new Properties();
-        configuration.SetProperty("Hello", "World");
-        configuration.GetProperty("Hello", "xxxx").Should().Be("World");
+        var properties = new Properties();
+        properties.SetProperty("Hello", "World");
+        
+        properties.GetProperty("Hello", "xxxx").Should().Be("World");
     }
 
     [Test]
-    public void RetrieveAllKeysTest()
+    public void PropertyNames_WhenSinglePropertySet_ReturnsOneKey()
     {
-        var configuration = new Properties();
-        configuration.SetProperty("Hello", "World");
-        var keys = configuration.PropertyNames();
+        var properties = new Properties();
+        properties.SetProperty("Hello", "World");
+        
+        var keys = properties.PropertyNames();
+        
         keys.Count().Should().Be(1);
     }
 
     [Test]
-    public void LibraryIsStable()
+    public void StoreToXml_WhenCalledWithIndexerAndNoPath_DoesNotThrow()
     {
-        var configuration = new Properties();
-        configuration.Invoking(c =>
+        var properties = new Properties();
+        
+        properties.Invoking(p =>
         {
-            c["Hello"] = "World";
-            c.StoreToXml();
+            p["Hello"] = "World";
+            p.StoreToXml();
         }).Should().NotThrow();
     }
 
     [Test]
-    public void StorePropertiesWithDefaultPath()
+    public void StoreToXml_WhenNoPathSpecified_CreatesDefaultConfigFile()
     {
-        var configuration = new Properties();
-        configuration.Invoking(c =>
-        {
-            c["Hello"] = "World";
-            c.StoreToXml();
-        }).Should().NotThrow();
-
+        var properties = new Properties();
+        properties["Hello"] = "World";
+        
+        properties.StoreToXml();
+        
         File.Exists("config.xml").Should().BeTrue();
     }
 
     [Test]
-    public void StorePropertiesWithSpecifiedPath()
+    public void StoreToXml_WhenPathSpecified_CreatesFileAtSpecifiedPath()
     {
-        var configuration = new Properties();
-        configuration.Invoking(c =>
-        {
-            c["Marco"] = "Polo";
-            c.StoreToXml("./../special.xml");
-        }).Should().NotThrow();
-
+        var properties = new Properties();
+        properties["Marco"] = "Polo";
+        
+        properties.StoreToXml("./../special.xml");
+        
         File.Exists("./../special.xml").Should().BeTrue();
     }
 
     [Test]
-    public void LoadConfigFromDefaultPath()
+    public void LoadFromXml_WhenLoadingFromDefaultPath_RestoresStoredProperties()
     {
         var firstConfig = new Properties
         {
@@ -85,25 +87,29 @@ public class PropertiesTests
         };
         firstConfig.StoreToXml();
 
-        var configuration = new Properties();
-        configuration.LoadFromXml();
-
-        configuration["Hello"].Should().Be("World");
+        var properties = new Properties();
+        
+        properties.LoadFromXml();
+        
+        properties["Hello"].Should().Be("World");
     }
 
     [Test]
-    public void LoadConfigFromNonExistentFile()
+    public void LoadFromXml_WhenFileDoesNotExist_ThrowsFileNotFoundException()
     {
-        var configuration = new Properties();
-        configuration.Invoking(c => { c.LoadFromXml("does-not-exist.xml"); }).Should()
-            .ThrowExactly<FileNotFoundException>();
+        var properties = new Properties();
+        
+        properties.Invoking(p => p.LoadFromXml("does-not-exist.xml"))
+            .Should().ThrowExactly<FileNotFoundException>();
     }
 
     [Test]
-    public void LoadConfigFromSpecifiedFile()
+    public void LoadFromXml_WhenLoadingFromSpecifiedFile_RestoresStoredProperties()
     {
-        var configuration = new Properties();
-        configuration.LoadFromXml("test-config.xml");
-        configuration["Hello"].Should().Be("Mum");
+        var properties = new Properties();
+        
+        properties.LoadFromXml("test-config.xml");
+        
+        properties["Hello"].Should().Be("Mum");
     }
 }
