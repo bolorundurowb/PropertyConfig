@@ -1,58 +1,69 @@
 # PropertyConfig
 
 [![Build, Test & Coverage](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/bolorundurowb/PropertyConfig/actions/workflows/build-and-test.yml)
-[![codecov](https://codecov.io/gh/bolorundurowb/PropertyConfig/graph/badge.svg?token=u0KEsaYozN)](https://codecov.io/gh/bolorundurowb/PropertyConfig) [![Method Parity](https://img.shields.io/badge/method----parity-6%20%2F%2015-yellowgreen.svg)]()
+[![codecov](https://codecov.io/gh/bolorundurowb/PropertyConfig/graph/badge.svg?token=u0KEsaYozN)](https://codecov.io/gh/bolorundurowb/PropertyConfig)
 ![NuGet Version](https://img.shields.io/nuget/v/PropertyConfig.dll)
 
+`PropertyConfig` is a lightweight .NET library for storing and loading flat key-value configuration in XML, inspired by Java's `java.util.Properties`.
 
-## Description
+## For library consumers
 
-This library is developed to provide similar functionality to Java's `java.util.Properties` class. It allows for the flat storing of name-value pairs in XML.
+### Install
 
-## Usage
-Get the library from Nuget by using your package manager or by running;
-
-```bash
+```powershell
 Install-Package PropertyConfig.dll
 ```
 
-Add the directive to your class file:
+### Quick start
+
 ```csharp
 using PropertyConfig;
-```
 
-Instantiate the class (preferably in the main entry class and storing it in a static variable)
-```csharp
-public static Properties configuration = new Properties();
-```
+var configuration = new Properties();
 
-Add whatever properties necessary, for example
-```csharp
+// Set values
 configuration["Hello"] = "World";
-//or 
-configuration.Add("Hello", "World");
+configuration.Add("Environment", "Production");
+
+// Save to XML
+configuration.StoreToXml(); // default file: config.xml
+configuration.StoreToXml("my-config.xml");
+configuration.StoreToXml("my-config.xml", "Do not modify manually");
+
+// Load from XML
+configuration.LoadFromXml(); // default file: config.xml
+configuration.LoadFromXml("my-config.xml");
 ```
 
-After including every property, save the configuration
-```csharp
-configuration.StoreToXml(); //saves to the default 'config.xml'
-//or
-configuration.StoreToXml("my-config.xml"); //saves to specified xml file
-//or
-configuration.StoreToXml("my-config.xml", "Do not modify manually"); // saves to specified file with additional comment
-```
+### Example XML output
 
-this produces an output that looks like
 ```xml
 <properties>
   <!--Do not modify manually-->
   <Hello>World</Hello>
+  <Environment>Production</Environment>
 </properties>
 ```
 
-To load a config file
-```csharp
-configuration.LoadFromXml() //loads from default 'config.xml'
-//or
-configuration.LoadFromXml("my-config.xml"); //loads config key-value pairs from the specified file
-```
+### When to use this library
+
+- You want a simple XML-backed key-value configuration format.
+- You prefer an API similar to Java `Properties`.
+- You need a minimal dependency for basic config persistence.
+
+## For contributors
+
+### Project layout
+
+- `src\PropertyConfig` - library source code.
+- `src\PropertyConfig.Tests` - unit tests.
+
+### Build and test
+
+Use your preferred .NET tooling (Rider, Visual Studio, or CLI) to build and run tests from the solution/projects in `src`.
+
+### Contribution notes
+
+- Keep changes focused and backward compatible where possible.
+- Add or update tests for behavior changes.
+- Open a PR with a clear description of the problem and solution.
