@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PropertyConfig.Tests/PropertyConfig.Tests.csproj" />
+  <Project Path="PropertyConfig/PropertyConfig.csproj" />
+</Solution>
