@@ -1,7 +1,6 @@
 ﻿using System.IO;
-using System.Linq;
-using AwesomeAssertions;
 using NUnit.Framework;
+using OmniAssert;
 
 namespace PropertyConfig.Tests;
 
@@ -13,7 +12,7 @@ public class PropertiesTests
     {
         var properties = new Properties();
         
-        properties.GetProperty("Hello").Should().BeNull();
+        properties.GetProperty("Hello").Verify().ToBeNull();
     }
 
     [Test]
@@ -21,7 +20,7 @@ public class PropertiesTests
     {
         var properties = new Properties();
         
-        properties.GetProperty("Hello", "xxxx").Should().Be("xxxx");
+        properties.GetProperty("Hello", "xxxx").Verify().ToBe("xxxx");
     }
 
     [Test]
@@ -30,7 +29,7 @@ public class PropertiesTests
         var properties = new Properties();
         properties.SetProperty("Hello", "World");
         
-        properties.GetProperty("Hello", "xxxx").Should().Be("World");
+        properties.GetProperty("Hello", "xxxx").Verify().ToBe("World");
     }
 
     [Test]
@@ -41,7 +40,7 @@ public class PropertiesTests
         
         var keys = properties.PropertyNames();
         
-        keys.Count().Should().Be(1);
+        keys.Verify().HasCount(1);
     }
 
     [Test]
@@ -49,11 +48,12 @@ public class PropertiesTests
     {
         var properties = new Properties();
         
-        properties.Invoking(p =>
+        var act = () =>
         {
-            p["Hello"] = "World";
-            p.StoreToXml();
-        }).Should().NotThrow();
+            properties["Hello"] = "World";
+            properties.StoreToXml();
+        };
+        act.NotThrow();
     }
 
     [Test]
@@ -64,7 +64,7 @@ public class PropertiesTests
         
         properties.StoreToXml();
         
-        File.Exists("config.xml").Should().BeTrue();
+        "config.xml".FileExists();
     }
 
     [Test]
@@ -75,7 +75,7 @@ public class PropertiesTests
         
         properties.StoreToXml("./../special.xml");
         
-        File.Exists("./../special.xml").Should().BeTrue();
+        "./../special.xml".FileExists();
     }
 
     [Test]
@@ -91,7 +91,7 @@ public class PropertiesTests
         
         properties.LoadFromXml();
         
-        properties["Hello"].Should().Be("World");
+        properties["Hello"].Verify().ToBe("World");
     }
 
     [Test]
@@ -99,8 +99,8 @@ public class PropertiesTests
     {
         var properties = new Properties();
         
-        properties.Invoking(p => p.LoadFromXml("does-not-exist.xml"))
-            .Should().ThrowExactly<FileNotFoundException>();
+        var act = () => properties.LoadFromXml("does-not-exist.xml");
+        act.Throws<FileNotFoundException>();
     }
 
     [Test]
@@ -110,6 +110,6 @@ public class PropertiesTests
         
         properties.LoadFromXml("test-config.xml");
         
-        properties["Hello"].Should().Be("Mum");
+        properties["Hello"].Verify().ToBe("Mum");
     }
 }
